@@ -3,7 +3,7 @@ from .models import Post, Group
 
 
 def index(request):
-    posts = Post.objects.select_related('group')[:5]
+    posts = Post.objects.select_related('group')[:10]
     context = {
         'posts': posts,
     }
@@ -12,7 +12,7 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    posts = group.posts.all()[:2]
+    posts = group.posts.all()[:10]
     context = {
         'group': group,
         'posts': posts,
