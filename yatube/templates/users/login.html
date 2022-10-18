@@ -26,9 +26,9 @@
 
           <form method="post"
             {% if action_url %}
-              <form method="post" action="{% url 'users:login' %}"
+              <form method="post" action="{% url 'posts:index' %}"
             {% endif %}
-          >{% csrf_token %}
+            >{% csrf_token %}
           
 
           {% for field in form %}
@@ -59,8 +59,6 @@
             <button type="submit" class="btn btn-primary">
               Войти
             </button>
-            <!-- Тест на внимательность. Без переопределения шаблона этого адреса
-            не существует. Нужно что-то делать, иначе все упадет -->
             <a href="{% url 'users:password_reset' %}" class="btn btn-link">
               Забыли пароль?
             </a>
