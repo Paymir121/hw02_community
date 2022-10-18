@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Posts{% endblock title %}
 {% block content %}
-  {% for post in posts %}
+  {% for post in page_obj %}
     <article class="col-9">
       <ul>
         <li>
@@ -17,5 +17,6 @@
     {% endif %}  
     </article>
     {% if not forloop.last %}<hr>{% endif %}
-  {% endfor %}  
+  {% endfor %}
+{% include 'includes/paginator.html' %}  
 {% endblock %} 
