@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Group, User
 from django.core.paginator import Paginator
+from .forms import PostForm
 
 POST_COUNT_IN_THE_SAMPLE: int = 10
 
@@ -49,3 +50,19 @@ def post_detail(request, post_id):
                 'author_post' : author_post,
     }
     return render(request, template , context) 
+
+
+def post_create(request):
+    template = 'posts/post_create.html'
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit = False)
+            post.author = request.user
+            post.save()
+            return render(request,request.user)
+        else:
+            return render(request, template , {'form' : form})
+    else:
+        form = PostForm()
+        return render(request, template , {'form' : form})
