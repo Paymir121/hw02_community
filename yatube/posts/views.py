@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Post, Group, User
 from django.core.paginator import Paginator
 from .forms import PostForm
@@ -57,12 +57,16 @@ def post_create(request):
     if request.method == 'POST':
         form = PostForm(request.POST)
         if form.is_valid():
-            post = form.save(commit = False)
+            post = form.save(commit=False)
             post.author = request.user
+            form.author = request.user
             post.save()
-            return render(request,request.user)
-        else:
-            return render(request, template , {'form' : form})
-    else:
-        form = PostForm()
-        return render(request, template , {'form' : form})
+            return redirect("posts:index") 
+    form = PostForm()
+    context = {
+        'form' : form,
+    }
+    return render(request, template , context) 
+        
+
+

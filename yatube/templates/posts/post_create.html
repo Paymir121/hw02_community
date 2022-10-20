@@ -1,26 +1,29 @@
 {% extends 'base.html' %}
 {% block title %}Создаем новый пост{% endblock title %}
 {% block content %}
-<main>
-    <div class="container py-5">
-      <div class="row justify-content-center">
-        <div class="col-md-8 p-5">
-          <div class="card">
-            <div class="card-header">       
-              Новый пост             
-            </div>
-                {{form}}
-                <div class="d-flex justify-content-end">
-                  <button type="submit" class="btn btn-primary">
-                    Сохранить
-                </button>
-                
-                </div>
-              </form>
-            </div>
-          </div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 p-5">
+      <div class="card">
+        <div class="card-header">
+          Новый пост             
         </div>
+        <div class="card-body">   
+          <form method = "post">
+            {% csrf_token %}
+            {{form.text}}</br>
+            <div class="form-group row my-3 p-3">
+              <label for="id_group">
+                Группа, к которой будет относиться пост                  
+              </label>
+              {{form.group}}
+            </div>
+            <div class="d-flex justify-content-end">
+              <button type = "submit" class = "btn btn-primary"> Создать пост </button></br>
+            </div>
+          </form>
       </div>
     </div>
-  </main>
-{% endblock %} 
+  </div>
+</div>
+{% endblock content%} 
