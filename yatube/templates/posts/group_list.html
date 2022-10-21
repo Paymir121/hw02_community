@@ -14,7 +14,8 @@
                 </li>
             </ul>
         </article>
-    <p>{{ post.text }}</p>    
+    <p>{{ post.text |truncatechars:200}}</p>
+    <a href="{% url 'posts:post_detail' post.pk %}">подробная информация </a>  
     {% if not forloop.last %}<hr>{% endif %}
     {% endfor %}
     {% include 'includes/paginator.html' %}  
